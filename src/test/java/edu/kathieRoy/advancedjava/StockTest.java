@@ -2,17 +2,20 @@ package edu.kathieRoy.advancedjava;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import java.math.BigDecimal;
+
+import static junit.framework.TestCase.assertEquals;
 
 /**
- * Unit test for simple App.
+ * Unit test for Assignment 2 - StockService
  */
 public class StockTest {
     /**
      * Rigorous Test :-)
      */
     @Test
-    public void shouldAnswerWithTrue() {
-        assertTrue(true);
+    public void testStockService() {
+        StockQuote quote = new StockQuote("IBM");
+        assertEquals("verify quoteAmt = 1.00", (new BigDecimal(1.00)), quote.getQuoteAmt());
     }
 }
