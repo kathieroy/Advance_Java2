@@ -2,7 +2,7 @@ package edu.kathieRoy.advancedjava;
 
 import java.math.BigDecimal;
 
-public interface StockService {
+interface StockService {
     /**
      * Return the current price for a share of stock for the given symbol
      *
@@ -10,8 +10,9 @@ public interface StockService {
      *               e.g. APPL for APPLE
      * @return a <CODE>StockQuote </CODE> instance
      */
-    StockQuote getQuote(String symbol);
+    @SuppressWarnings("SpellCheckingInspection")
+    public StockQuote getQuote(String symbol);
 
-    BigDecimal getQuoteAmt();
+    public BigDecimal getQuoteAmt();
 
 }
