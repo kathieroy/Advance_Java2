@@ -1,40 +1,35 @@
 package edu.kathieRoy.advancedjava;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
-@SuppressWarnings("SpellCheckingInspection")
-public class StockQuote implements StockService {
+public class StockQuote {
+
     private final BigDecimal quoteAmt = new BigDecimal(1.00);
 
-    // private String symbol;
+    private BigDecimal price;
+    private Date date;
+    private String symbol;
 
     /**
      * @param symbol we are taking a symbol in, ie: IBM - but not yet using it.
      */
-    //constructor to return the amount
-    StockQuote(String symbol) {
+    public StockQuote(BigDecimal price, Date date, String symbol) {
         super();
-        //     this.symbol = symbol;
+        this.price = price;
+        this.date = date;
+        this.symbol = symbol;
     }
 
-    /**
-     *
-     * @param symbol the stock symbol of the company you want a quote for.
-     *               e.g. APPL for APPLE
-     * @return returns the StockQuote object
-     */
-    @Override
-    public StockQuote getQuote(String symbol) {
-        return new StockQuote(symbol);
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    /**
-     *
-     * @return the quote amount
-     */
-    @Override
-    public BigDecimal getQuoteAmt() {
-        return quoteAmt;
+    public Date getDate() {
+        return date;
     }
 
+    public String getSymbol() {
+        return symbol;
+    }
 }

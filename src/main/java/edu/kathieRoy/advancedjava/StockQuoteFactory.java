@@ -1,16 +1,27 @@
 package edu.kathieRoy.advancedjava;
 
+import java.math.BigDecimal;
+import java.util.Calendar;
+
 /**
  * @author kathie Use the class to get the object of StockQuote
  */
 class StockQuoteFactory {
-    /**
-     * @param args this program will return the Stock quote object,
-     *             which includes the quote amount for IBM stocks
-     */
-    public static void main(String[] args) {
 
-        StockQuote quote = new StockQuote("IBM");
-        System.out.println("stock quote = $" + quote.getQuoteAmt());
+    public static StockService getStockService() {
+
+        return new BasicStockService();
+
+        /*
+        return new StockService() {
+
+            @Override
+            public StockQuote getQuote(String symbol) {
+                return StockQuote(new BigDecimal(100)Calendar.getInstance().getTime(), "APPL")
+            }
+        };
+        */
+
     }
+
 }

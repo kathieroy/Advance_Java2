@@ -10,9 +10,8 @@ interface StockService {
      *               e.g. APPL for APPLE
      * @return a <CODE>StockQuote </CODE> instance
      */
-    @SuppressWarnings("SpellCheckingInspection")
     public StockQuote getQuote(String symbol);
 
-    public BigDecimal getQuoteAmt();
+
 
 }
