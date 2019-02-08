@@ -1,5 +1,6 @@
 package edu.kathieRoy.advancedjava;
 
+import edu.kathieRoy.advancedjava.model.StockQuote;
 import org.junit.Test;
 
 import java.math.BigDecimal;

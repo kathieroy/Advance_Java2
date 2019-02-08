@@ -1,11 +1,12 @@
-package edu.kathieRoy.advancedjava;
+package edu.kathieRoy.advancedjava.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * this is a container class the holds the information about a stock for a given date
+ */
 public class StockQuote {
-
-    private final BigDecimal quoteAmt = new BigDecimal(1.00);
 
     private BigDecimal price;
     private Date date;
@@ -21,14 +22,27 @@ public class StockQuote {
         this.symbol = symbol;
     }
 
+    /**
+     * get method to return the price of a stock
+     *
+     * @return
+     */
     public BigDecimal getPrice() {
         return price;
     }
 
+    /**
+     * get method to return the date of the stock price
+     * @return
+     */
     public Date getDate() {
         return date;
     }
 
+    /**
+     * get method to return the symbol of the stock
+     * @return
+     */
     public String getSymbol() {
         return symbol;
     }

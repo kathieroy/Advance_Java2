@@ -1,16 +1,15 @@
-package edu.kathieRoy.advancedjava;
+package edu.kathieRoy.advancedjava.service;
 
-import java.math.BigDecimal;
-import java.util.Calendar;
 
 /**
  * @author kathie Use the class to get the object of StockQuote
  */
-class StockQuoteFactory {
+class StockServiceFactory {
 
     public static StockService getStockService() {
 
         return new BasicStockService();
+
 
         /*
         return new StockService() {
