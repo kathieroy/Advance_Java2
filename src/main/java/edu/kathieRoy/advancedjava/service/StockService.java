@@ -2,6 +2,9 @@ package edu.kathieRoy.advancedjava.service;
 
 import edu.kathieRoy.advancedjava.model.StockQuote;
 
+import java.util.Calendar;
+import java.util.List;
+
 /**
  * this is an interface that will be used for use in obtaining a stockQuote
  */
@@ -20,6 +23,6 @@ public interface StockService {
      * @param until the date of the last stock quote
      * @return a list of StockQuote instances. One for each day in the range specified.
      */
-    //   List<StockQuote> getQuote(String symbol, Calendar from, Calendar until);
+    List<StockQuote> getQuote(String symbol, Calendar from, Calendar until);
 
 }

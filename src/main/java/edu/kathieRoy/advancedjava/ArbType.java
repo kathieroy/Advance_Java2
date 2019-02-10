@@ -7,16 +7,20 @@ package edu.kathieRoy.advancedjava;
  * @param <T>
  */
 public class ArbType<T> {
-    private T inputStr;
+    private final T inputStr;
 
+    /**
+     * @param input
+     */
     public ArbType(T input) {
         this.inputStr = input;
     }
 
-    public void setInputStr(T inputStr) {
-        this.inputStr = inputStr;
-    }
 
+    /**
+     *
+     * @return
+     */
     public T getInputStr() {
         return inputStr;
     }

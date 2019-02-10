@@ -8,9 +8,10 @@ class GenericMethod {
         String[] input = {"1", "2", "3", "4"};
         String[] ret = GenericMethod.<String>swap(input, 2, 3);
         System.out.println("returned array is " + ret[0] + ret[1] + ret[2] + ret[3]);
+
     }
 
-    public static <T> T[] swap(T[] input, int posa, int posb) {
+    private static <T> T[] swap(T[] input, int posa, int posb) {
         T holda = input[posa];
         input[posa] = input[posb];
         input[posb] = holda;

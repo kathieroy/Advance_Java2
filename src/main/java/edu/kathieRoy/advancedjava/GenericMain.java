@@ -11,7 +11,7 @@ public class GenericMain {
 
         ArbType<String> arbTypeS = new ArbType<String>("Cool");
         String ret = arbTypeS.getInputStr();
-        System.out.println(ret.toString());
+        System.out.println(ret);
 
     }
 }

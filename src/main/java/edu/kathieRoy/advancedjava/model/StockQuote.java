@@ -1,21 +1,21 @@
 package edu.kathieRoy.advancedjava.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.Calendar;
 
 /**
  * this is a container class the holds the information about a stock for a given date
  */
 public class StockQuote {
 
-    private BigDecimal price;
-    private Date date;
-    private String symbol;
+    private final BigDecimal price;
+    private final Calendar date;
+    private final String symbol;
 
-    /**
-     * @param symbol we are taking a symbol in, ie: IBM - but not yet using it.
+    /*
+     * ** @param symbol we are taking a symbol in, ie: IBM - but not yet using it.
      */
-    public StockQuote(BigDecimal price, Date date, String symbol) {
+    public StockQuote(BigDecimal price, Calendar date, String symbol) {
         super();
         this.price = price;
         this.date = date;
@@ -25,7 +25,7 @@ public class StockQuote {
     /**
      * get method to return the price of a stock
      *
-     * @return
+     * @return the price of the StockQuote object
      */
     public BigDecimal getPrice() {
         return price;
@@ -33,17 +33,18 @@ public class StockQuote {
 
     /**
      * get method to return the date of the stock price
-     * @return
+     * @return the date of the StockQuote object
      */
-    public Date getDate() {
+    public Calendar getDate() {
         return date;
     }
 
     /**
      * get method to return the symbol of the stock
-     * @return
+     * @return the symbol of the stock quote object
      */
     public String getSymbol() {
         return symbol;
     }
+
 }
