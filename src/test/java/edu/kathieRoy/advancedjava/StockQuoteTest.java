@@ -40,7 +40,7 @@ public class StockQuoteTest {
         BasicStockService stockService = new BasicStockService(); // would rather do this in a before
         Calendar startDate = Calendar.getInstance();
         Calendar stopDate = Calendar.getInstance();
-        stopDate.add(Calendar.DAY_OF_YEAR, 1);  // + 1 day
+        stopDate.add(Calendar.DAY_OF_YEAR, 2);  // + 2 days
         List<StockQuote> stockQuoteList = stockService.getQuote("APPL", startDate, stopDate);
         assertEquals("Verify list length", 2, stockQuoteList.size());
 
