@@ -22,7 +22,7 @@ class App {
         String date1;
         String date2;
         // if dates are not passed in, request the user to input them
-        if (args.length != 0) {
+        if (args.length == 0) {
             Scanner sc = new Scanner(System.in);
             System.out.printf("Enter Start Date (%s): ", pattern);
             date1 = sc.next();
@@ -40,13 +40,16 @@ class App {
         System.out.println("First, here is one StockQuote: ");
 
         StockQuote quote = stockService.getQuote("APPL");
-        System.out.println("Symbol " + quote.getSymbol());
-        System.out.println("Date " + quote.getDate());
-        System.out.println("Price " + quote.getPrice());
+        System.out.print("Symbol " + quote.getSymbol());
+        System.out.print(" Date " + quote.getDate().getTime());
+        System.out.println(" Price " + quote.getPrice());
 
         System.out.println("Now, here is the number of rows in the list of StockQuotes found for the Symbol/Date Range: ");
         List<StockQuote> stockQuoteList = stockService.getQuote("APPL", startDate, stopDate);
-        System.out.println("Symbol has " + stockQuoteList.size() + "rows in it");
+        System.out.println("Symbol APPL has " + stockQuoteList.size() + " rows in it");
+        for (StockQuote stockQuote : stockQuoteList) {
+            System.out.println("Symbol: " + stockQuote.getSymbol() + " Date: " + stockQuote.getDate().getTime() + " Price: " + stockQuote.getPrice());
+        }
     }
 
     /**

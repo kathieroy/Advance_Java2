@@ -4,20 +4,20 @@ import edu.kathieRoy.advancedjava.model.StockQuote;
 
 import java.util.Calendar;
 import java.util.List;
-
-/**
- * this is an interface that will be used for use in obtaining a stockQuote
- */
 public interface StockService {
     /**
      * Return the current price for a share of stock for the given symbol
      *
      * @param symbol the stock symbol of the company you want a quote for e.g. APPL for APPLE
-     * @return a <CODE>BigDecimal</CODE> instance
+     * @return a <CODE>StockQuote</CODE> instance
      */
     StockQuote getQuote(String symbol);
     /**
      * Get a historical list of stock quotes for the provide symbol
+     * This method will return one StockQuote per 24 hour period.
+     * If you wish more or less StockQuotes returned you can specify the
+     * Interval yourself using the
+     *
      * @param symbol the stock symbol to search for
      * @param from the date of the first stock quote
      * @param until the date of the last stock quote
