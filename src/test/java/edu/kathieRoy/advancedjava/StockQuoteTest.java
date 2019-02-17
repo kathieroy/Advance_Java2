@@ -1,5 +1,6 @@
 package edu.kathieRoy.advancedjava;
 
+import edu.kathieRoy.advancedjava.model.Interval;
 import edu.kathieRoy.advancedjava.model.StockQuote;
 import edu.kathieRoy.advancedjava.service.BasicStockService;
 import org.junit.Test;
@@ -33,17 +34,29 @@ public class StockQuoteTest {
     }
 
     /**
-     *
+     *  this test will simply determine if the right number of stockQuotes are returned for the given date range
+     *  because start date and stop date are inclusive, 20180101, 20180102 is two days
      */
     @Test
     public void testGetQuoteList() {
-        BasicStockService stockService = new BasicStockService(); // would rather do this in a before
+        BasicStockService stockService = new BasicStockService(); // would I rather do this in a before?
         Calendar startDate = Calendar.getInstance();
         Calendar stopDate = Calendar.getInstance();
         stopDate.add(Calendar.DAY_OF_YEAR, 2);  // + 2 days
         List<StockQuote> stockQuoteList = stockService.getQuote("APPL", startDate, stopDate);
-        assertEquals("Verify list length", 2, stockQuoteList.size());
+        assertEquals("Verify list length", 3, stockQuoteList.size());
+    }
 
-
+    /**
+     *
+     */
+    @Test
+    public void testGetQuoteListInterval() {
+        BasicStockService stockService = new BasicStockService();
+        Calendar startDate = Calendar.getInstance();
+        Calendar stopDate = Calendar.getInstance();
+        stopDate.add(Calendar.DAY_OF_YEAR, 2);  // + 2 days
+        List<StockQuote> stockQuoteList = stockService.getQuote("APPL", startDate, stopDate, Interval.HOUR);
+        assertEquals("Verify list length", 72, stockQuoteList.size());
     }
 }
