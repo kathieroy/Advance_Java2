@@ -1,11 +1,14 @@
 package edu.kathieRoy.advancedjava.model;
 
+import jdk.nashorn.internal.ir.annotations.Immutable;
+
 import java.math.BigDecimal;
 import java.util.Calendar;
 
 /**
  * this is a container class the holds the information about a stock for a given date
  */
+@Immutable
 public class StockQuote {
 
     private final BigDecimal price;
@@ -16,9 +19,9 @@ public class StockQuote {
      * ** @param symbol we are taking a symbol in, ie: IBM - but not yet using it.
      */
     public StockQuote(BigDecimal price, Calendar date, String symbol) {
-        super();
+
         this.price = price;
-        this.date = date;
+        this.date = (Calendar) date.clone();
         this.symbol = symbol;
     }
 

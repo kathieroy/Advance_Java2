@@ -5,5 +5,21 @@ package edu.kathieRoy.advancedjava.model;
  * to be used i retrieving stock prices
  */
 public enum Interval {
-    SECOND, MINUTE, QUARTER_HOUR, HALF_HOUR, HOUR, DAY
+
+    QUARTER_HOUR("Every quarter hour", 96),
+    HALF_HOUR("Every half hour", 48),
+    HOUR("Every Hour", 24),
+    DAY("Once a day", 1);
+
+    private String message;
+    private int numberPerDay;
+
+    Interval(String message, int numPerDay) {
+        this.message = message;
+        this.numberPerDay = numPerDay;
+    }
+
+    public int getNumberPerDay() {
+        return numberPerDay;
+    }
 }
