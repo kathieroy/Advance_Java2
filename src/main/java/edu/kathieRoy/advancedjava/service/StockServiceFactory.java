@@ -2,9 +2,11 @@ package edu.kathieRoy.advancedjava.service;
 
 
 /**
- * @author kathie Use the class to get the object of StockQuote
+ * @author kathie
+ * This factory gets the stock service implementation which can used to get stockquote info.
+ *
  */
-class StockServiceFactory {
+public class StockServiceFactory {
 
     public static StockService getStockService() {
 
