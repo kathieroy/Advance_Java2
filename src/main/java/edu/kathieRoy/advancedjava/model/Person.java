@@ -1,10 +1,6 @@
 package edu.kathieRoy.advancedjava.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
@@ -13,19 +9,27 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="person")
 public class Person {
-
     private int id;
     private String firstName;
     private String lastName;
     private Timestamp birthDate;
 
     /**
+     * Non argument 'default' constructor
+     * required for ORM mapping framework like Hibernate
+     */
+    public Person() {
+    }
+
+    /**
      * Primary Key - Unique ID for a particular row in the person table.
      *
      * @return an integer value
      */
-    @Id
+
     @Column(name = "ID", nullable = false, insertable = true, updatable = true)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }

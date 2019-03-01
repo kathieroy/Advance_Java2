@@ -1,9 +1,9 @@
 package edu.kathieRoy.advancedjava.service;
 
 /**
- * Used to signal an issue with ActivitiesService
+ * Used to signal an issue with PersonService
  */
-public class ActivitiesServiceException extends Exception {
+public class PersonServiceException extends Exception {
 
     /**
      * Constructs a new exception with the specified detail message and
@@ -19,7 +19,7 @@ public class ActivitiesServiceException extends Exception {
      *                unknown.)
      * @since 1.4
      */
-    public ActivitiesServiceException(String message, Throwable cause) {
+    public PersonServiceException(String message, Throwable cause) {
         super(message, cause);
     }
 }

@@ -1,7 +1,7 @@
 package edu.kathieRoy.advancedjava.util;
 
 import com.ibatis.common.jdbc.ScriptRunner;
-import edu.kathieRoy.advancedjava.service.DatabaseActivitiesService;
+import edu.kathieRoy.advancedjava.service.DatabasePersonService;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -42,7 +42,7 @@ public class DatabaseUtils {
     public static SessionFactory getSessionFactory() {
 
         // singleton pattern
-        synchronized (DatabaseActivitiesService.class) {
+        synchronized (DatabasePersonService.class) {
             if (sessionFactory == null) {
 
                 Configuration configuration = getConfiguration();

@@ -4,9 +4,9 @@ package edu.kathieRoy.advancedjava.apps.stockquote;
 import edu.kathieRoy.advancedjava.model.Interval;
 import edu.kathieRoy.advancedjava.model.StockQuery;
 import edu.kathieRoy.advancedjava.model.StockQuote;
+import edu.kathieRoy.advancedjava.service.ServiceFactory;
 import edu.kathieRoy.advancedjava.service.StockService;
 import edu.kathieRoy.advancedjava.service.StockServiceException;
-import edu.kathieRoy.advancedjava.service.StockServiceFactory;
 
 import java.text.ParseException;
 import java.util.List;
@@ -128,7 +128,7 @@ public class BasicStockQuoteApplication {
         try {
             Interval interval = findInterval(args[3]);
             StockQuery stockQuery = new StockQuery(args[0], args[1], args[2], interval);
-            StockService stockService = StockServiceFactory.getInstance();
+            StockService stockService = ServiceFactory.getStockServiceInstance();
 
             BasicStockQuoteApplication basicStockQuoteApplication =
                     new BasicStockQuoteApplication(stockService);

@@ -1,10 +1,10 @@
 package edu.kathieRoy.advancedjava.service;
 
-import edu.kathieRoy.advancedjava.model.Hobby;
-import edu.kathieRoy.advancedjava.model.PersonHobby;
-import org.hibernate.Criteria;
+
 import edu.kathieRoy.advancedjava.model.Person;
+import edu.kathieRoy.advancedjava.model.StockInterests;
 import edu.kathieRoy.advancedjava.util.DatabaseUtils;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -16,7 +16,7 @@ import java.util.List;
 /**
  *
  */
-public class DatabaseActivitiesService implements ActivitiesService {
+public class DatabasePersonService implements PersonService {
     /**
      * Get a list of all people
      *
@@ -24,7 +24,7 @@ public class DatabaseActivitiesService implements ActivitiesService {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public List<Person> getPerson() throws ActivitiesServiceException{
+    public List<Person> getPerson() throws PersonServiceException {
         Session session = DatabaseUtils.getSessionFactory().openSession();
         List<Person> returnValue = null;
         Transaction transaction = null;
@@ -43,7 +43,7 @@ public class DatabaseActivitiesService implements ActivitiesService {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();  // close transaction
             }
-            throw new ActivitiesServiceException("Could not get Person data. " + e.getMessage(), e);
+            throw new PersonServiceException("Could not get Person data. " + e.getMessage(), e);
         } finally {
             if (transaction != null && transaction.isActive()) {
                 transaction.commit();
@@ -79,29 +79,29 @@ public class DatabaseActivitiesService implements ActivitiesService {
     }
 
     /**
-     * Get a list of all a person's hobbies.
+     * Get a list of all a person's stocks.
      *
      * @param person the person
-     * @return a list of hobby instances
+     * @return a list of stock instances
      */
     @Override
     @SuppressWarnings("unchecked")
-    public List<Hobby> getHobbies(Person person) {
+    public List<StockInterests> getStocks(Person person) {
         Session session =  DatabaseUtils.getSessionFactory().openSession();
         Transaction transaction = null;
-        List<Hobby> hobbies = new ArrayList<>();
+        List<StockInterests> hobbies = new ArrayList<>();
         try {
             transaction = session.beginTransaction();
-            Criteria criteria = session.createCriteria(PersonHobby.class);
+            Criteria criteria = session.createCriteria(StockInterests.class);
             criteria.add(Restrictions.eq("person", person));
             /**
              * NOTE criteria.list(); generates unchecked warning so SuppressWarnings
              * is used - HOWEVER, this about the only @SuppressWarnings I think it is OK
              * to suppress them - in almost all other cases they should be fixed not suppressed
              */
-            List<PersonHobby> list = criteria.list();
-            for (PersonHobby personHobby : list) {
-                hobbies.add(personHobby.getHobby());
+            List<StockInterests> list = criteria.list();
+            for (StockInterests personStockInterests : list) {
+                hobbies.add(personStockInterests.getStockInterests());
             }
             transaction.commit();
         } catch (HibernateException e) {
@@ -118,21 +118,21 @@ public class DatabaseActivitiesService implements ActivitiesService {
     }
 
     /**
-     * Assign a hobby to a person.
+     * Assign a stockInterests to a person.
      *
-     * @param hobby  The hobby to assign
-     * @param person The person to assign the hobby too.
+     * @param stockInterests  The stockInterests to assign
+     * @param person The person to assign the stockInterests too.
      */
     @Override
-    public void addHobbyToPerson(Hobby hobby, Person person) {
+    public void addHobbyToPerson(StockInterests stockInterests, Person person) {
         Session session =  DatabaseUtils.getSessionFactory().openSession();
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            PersonHobby personHobby = new PersonHobby();
-            personHobby.setHobby(hobby);
-            personHobby.setPerson(person);
-            session.saveOrUpdate(personHobby);
+            PersonStockInterests personStockInterests = new PersonStockInterests();
+            personStockInterests.setStockInterests(stockInterests);
+            personStockInterests.setPerson(person);
+            session.saveOrUpdate(personStockInterests);
             transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null && transaction.isActive()) {
