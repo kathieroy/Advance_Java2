@@ -33,8 +33,9 @@ public class StockQuoteTest {
     @Test
     public void testGetStockQuoteWithCalendar(){
         Calendar cDate = Calendar.getInstance();
-        stockQuote = new StockQuote(price, cDate, symbol);
-        assertEquals("Share date is correct", date, stockQuote.getDate());
+        java.util.Date jDate = cDate.getTime();
+         stockQuote = new StockQuote(price, cDate, symbol);
+        assertEquals("Share date is correct", jDate, stockQuote.getDate());
     }
 
 
