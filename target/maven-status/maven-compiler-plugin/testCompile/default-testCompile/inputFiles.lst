@@ -1,2 +1,6 @@
-C:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\StockQuoteTest.java
-C:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\AppTest.java
+c:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\stockquote\services\DatabaseStockServiceTest.java
+c:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\stockquote\services\StockServiceFactoryTest.java
+c:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\stockquote\model\StockQueryTest.java
+c:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\stockquote\stockquote\BasicStockQuoteApplicationTest.java
+c:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\stockquote\util\DatabaseUtilsTest.java
+c:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\stockquote\model\StockQuoteTest.java

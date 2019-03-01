@@ -22,8 +22,8 @@ public class DatabaseUtils {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/stocks";
 
     //  Database credentials
-    private static final String USER = "kathie";
-    private static final String PASS = "testsql";
+    private static final String USER = "monty";
+    private static final String PASS = "some_pass";
 
     public static final String initializationFile = "./src/main/sql/stocks_db_initialization.sql";
 
