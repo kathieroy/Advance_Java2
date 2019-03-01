@@ -1,0 +1,6 @@
+edu\kathieRoy\advancedjava\stockquote\util\DatabaseUtilsTest.class
+edu\kathieRoy\advancedjava\stockquote\stockquote\BasicStockQuoteApplicationTest.class
+edu\kathieRoy\advancedjava\stockquote\services\StockServiceFactoryTest.class
+edu\kathieRoy\advancedjava\stockquote\model\StockQueryTest.class
+edu\kathieRoy\advancedjava\stockquote\model\StockQuoteTest.class
+edu\kathieRoy\advancedjava\stockquote\services\DatabaseStockServiceTest.class
