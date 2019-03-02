@@ -12,7 +12,7 @@ public class Person {
     private int id;
     private String firstName;
     private String lastName;
-    private Timestamp birthDate;
+
 
     /**
      * Non argument 'default' constructor
@@ -80,23 +80,7 @@ public class Person {
         this.lastName = lastName;
     }
 
-    /**
-     *
-     * @return the person's birthdate.
-     */
-    @Basic
-    @Column(name = "birth_date", nullable = false, insertable = true, updatable = true)
-    public Timestamp getBirthDate() {
-        return birthDate;
-    }
 
-    /**
-     * Specify the person's date of birth.
-     * @param birthDate  the time the person was born.
-     */
-    public void setBirthDate(Timestamp birthDate) {
-        this.birthDate = birthDate;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -106,8 +90,7 @@ public class Person {
         Person person = (Person) o;
 
         if (id != person.id) return false;
-        if (birthDate != null ? !birthDate.equals(person.birthDate) : person.birthDate != null)
-            return false;
+
         if (firstName != null ? !firstName.equals(person.firstName) : person.firstName != null)
             return false;
         if (lastName != null ? !lastName.equals(person.lastName) : person.lastName != null)
@@ -121,7 +104,7 @@ public class Person {
         int result = id;
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
+
         return result;
     }
 
@@ -130,8 +113,7 @@ public class Person {
         return "Person{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", birthDate=" + birthDate +
+                ", lastName='" + lastName +  +
                 '}';
     }
 }

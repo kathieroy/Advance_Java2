@@ -1,12 +1,9 @@
 package edu.kathieRoy.advancedjava.apps.stockquote;
 
 
-import edu.kathieRoy.advancedjava.model.Interval;
-import edu.kathieRoy.advancedjava.model.StockQuery;
-import edu.kathieRoy.advancedjava.model.StockQuote;
-import edu.kathieRoy.advancedjava.service.ServiceFactory;
-import edu.kathieRoy.advancedjava.service.StockService;
-import edu.kathieRoy.advancedjava.service.StockServiceException;
+import edu.kathieRoy.advancedjava.model.*;
+import edu.kathieRoy.advancedjava.service.*;
+
 
 import java.text.ParseException;
 import java.util.List;
@@ -17,6 +14,8 @@ import java.util.List;
 public class BasicStockQuoteApplication {
 
     private StockService stockService;
+
+    private PersonService personService;
 
     // an example of how to use enum - not part of assignment 3 but useful for assignment 4
 
@@ -54,6 +53,16 @@ public class BasicStockQuoteApplication {
     /**
      * Create a new Application.
      *
+     * @param personService the PersonService  this application instance should use for
+     *                     person Stock Interests queries.
+     */
+    public BasicStockQuoteApplication(PersonService personService) {
+        this.personService = personService;
+    }
+
+    /**
+     * Create a new Application.
+     *
      * @param stockService the StockService this application instance should use for
      *                     stock queries.
      *                     <p/>
@@ -82,6 +91,19 @@ public class BasicStockQuoteApplication {
             stringBuilder.append(stockQuote.toString());
         }
 
+        return stringBuilder.toString();
+    }
+    public String displayPersonStockInterests(Person person) throws PersonServiceException {
+        StringBuilder stringBuilder = new StringBuilder();
+
+            List<StockInterests> stockInterests =
+                    personService.getStockInterests(person);
+
+            stringBuilder.append("Stock Interests for: " + person.getFirstName() +
+                    " " + person.getLastName() + "\n");
+            for (StockInterests StockInterest : stockInterests) {
+                stringBuilder.append(StockInterest.toString());
+            }
         return stringBuilder.toString();
     }
 
@@ -128,13 +150,11 @@ public class BasicStockQuoteApplication {
         try {
             Interval interval = findInterval(args[3]);
             StockQuery stockQuery = new StockQuery(args[0], args[1], args[2], interval);
-            StockService stockService = ServiceFactory.getStockServiceInstance();
 
+            StockService stockService = ServiceFactory.getStockServiceInstance();
             BasicStockQuoteApplication basicStockQuoteApplication =
                     new BasicStockQuoteApplication(stockService);
-
             basicStockQuoteApplication.displayStockQuotes(stockQuery);
-
         } catch (ParseException e) {
             exitStatus = ProgramTerminationStatusEnum.ABNORMAL;
             programTerminationMessage = "Invalid date data: " + e.getMessage();
@@ -143,8 +163,24 @@ public class BasicStockQuoteApplication {
             programTerminationMessage = "StockService failed: " + e.getMessage();
         }
 
+        try {
+            PersonService personService = ServiceFactory.getPersonServiceInstance();
+            BasicStockQuoteApplication basicPersonApplication =
+                    new BasicStockQuoteApplication(personService);
+
+            List<Person> personList = personService.getPerson();
+            for (Person person : personList) {
+                basicPersonApplication.displayPersonStockInterests(person);
+            }
+        } catch (PersonServiceException e) {
+            exitStatus = ProgramTerminationStatusEnum.ABNORMAL;
+            programTerminationMessage = "StockService failed: " + e.getMessage();
+        }
+
         exit(exitStatus, programTerminationMessage);
-        System.out.println("Oops could not parse a date");
+     //   System.out.println("Oops could not parse a date");
+
+
     }
 
     /**

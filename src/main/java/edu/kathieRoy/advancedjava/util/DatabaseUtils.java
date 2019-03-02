@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * A class that contains database related utility methods.
@@ -26,8 +27,8 @@ public class DatabaseUtils {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/stocks";
 
     //  Database credentials
-    private static final String USER = "kathie";
-    private static final String PASS = "testsql";
+    private static final String USER = "monty";
+    private static final String PASS = "some_test";
 
     public static final String initializationFile = "./src/main/sql/stocks_db_initialization.sql";
 
@@ -125,7 +126,23 @@ public class DatabaseUtils {
                     + e.getMessage(), e);
         }
     }
-
-
-
-}
+        /**
+         * Execute SQL code
+         * @param someSQL  the code to execute
+         * @return true if the operation succeeded.
+         * @throws DatabaseException if accessing and executing the sql failed in an unexpected way.
+         *
+         */
+        public static boolean executeSQL(String someSQL) throws DatabaseException {
+            Connection connection = null;
+            boolean returnValue = false;
+            try {
+                connection = DatabaseUtils.getConnection();
+                Statement statement = connection.createStatement();
+                returnValue = statement.execute(someSQL);
+            } catch (DatabaseConnectionException | SQLException e) {
+                throw new DatabaseException(e.getMessage(), e);
+            }
+            return returnValue;
+        }
+    }

@@ -14,13 +14,9 @@ public class PersonTest {
 
     public  static final Calendar birthDayCalendar = Calendar.getInstance();
 
-    static {
-        birthDayCalendar.set(1990, Calendar.JANUARY, 12);
-    }
 
-    public static final String firstName = "Spencer";
-    public  static final String lastName = "Marks";
-    public static final Timestamp birthDate = new Timestamp(birthDayCalendar.getTimeInMillis());
+    public static final String firstName = "Roy";
+    public  static final String lastName = "Kathie";
 
     /**
      * Testing helper method for generating Person test data
@@ -29,7 +25,7 @@ public class PersonTest {
      */
     public static Person createPerson() {
         Person person = new Person();
-        person.setBirthDate(birthDate);
+
         person.setFirstName(firstName);
         person.setLastName(lastName);
         return person;
@@ -42,7 +38,6 @@ public class PersonTest {
         person.setId(id);
         assertEquals("first name matches", firstName, person.getFirstName());
         assertEquals("last name matches", lastName, person.getLastName());
-        assertEquals("birthday matches", birthDate, person.getBirthDate());
         assertEquals("id matches", id, person.getId());
 
     }

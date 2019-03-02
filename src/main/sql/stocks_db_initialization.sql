@@ -1,13 +1,32 @@
 /** create the stocks database */
-
+DROP TABLE IF EXISTS stockInterests CASCADE;
 DROP TABLE IF EXISTS quotes CASCADE;
+DROP TABLE IF EXISTS person CASCADE;
+
+
 CREATE TABLE quotes(
    id INT NOT NULL AUTO_INCREMENT,
    symbol VARCHAR(4) NOT NULL,
    time DATETIME NOT NULL,
-   price DECIMAL NOT NULL,
+   price DECIMAL(13,2) NOT NULL,
    PRIMARY KEY ( id )
 );
+CREATE TABLE person
+(
+   id        INT         NOT NULL AUTO_INCREMENT,
+   first_Name VARCHAR(30) NOT NULL,
+   last_Name  VARCHAR(30) NOT NULL,
+   PRIMARY KEY (id)
+);
+
+CREATE TABLE stockInterests
+(
+   ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+   person_id INT NOT NULL,
+   symbol VARCHAR(4) NOT NULL,
+   FOREIGN KEY (person_id) REFERENCES person (id)
+);
+
 
 INSERT INTO quotes (symbol,time,price) VALUES ('GOOG','2014-08-19 00:01:01','85.00');
 INSERT INTO quotes (symbol,time,price) VALUES ('GOOG','2014-09-03 00:02:01','86.35');
@@ -51,4 +70,11 @@ INSERT INTO quotes (symbol,time,price) VALUES ('AMZN','2015-02-03 07:00:01','313
 INSERT INTO quotes (symbol,time,price) VALUES ('AMZN','2015-02-03 08:00:01','333.61');
 INSERT INTO quotes (symbol,time,price) VALUES ('AMZN','2015-02-04 12:00:01','323.71');
 INSERT INTO quotes (symbol,time,price) VALUES ('AMZN','2015-02-04 12:40:01','363.81');
-
+INSERT INTO person (first_name,last_Name) VALUES ('Kathie','Roy');
+INSERT INTO person (first_name,last_Name) VALUES ('Thomas','Jefferson');
+INSERT INTO person (first_name,last_Name) VALUES ('Hank','Williams');
+INSERT INTO stockInterests (person_id,symbol) VALUES (1,'APPL');
+INSERT INTO stockInterests (person_id,symbol) VALUES (1,'AMZN');
+INSERT INTO stockInterests (person_id,symbol) VALUES (1,'GOOG');
+INSERT INTO stockInterests (person_id,symbol) VALUES (2,'APPL');
+INSERT INTO stockInterests (person_id,symbol) VALUES (3,'GOOG');

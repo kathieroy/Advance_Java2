@@ -5,6 +5,8 @@ import edu.kathieRoy.advancedjava.model.Interval;
 import edu.kathieRoy.advancedjava.model.StockQuote;
 import edu.kathieRoy.advancedjava.service.DatabaseStockService;
 import edu.kathieRoy.advancedjava.service.StockServiceException;
+import edu.kathieRoy.advancedjava.util.DatabaseInitializationException;
+import edu.kathieRoy.advancedjava.util.DatabaseUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,12 +28,12 @@ public class DatabaseStockServiceTest {
     private Calendar until;
     private String symbol;
     public static final String dateFormat = "yyyy-MM-dd HH:mm:ss";
+    DatabaseStockService databaseStockService = null;
 
 @Before
-public void setUp() {
-    symbol = "APPL";
-    price = new BigDecimal(100);
-
+public void setUp() throws DatabaseInitializationException {
+    DatabaseUtils.initializeDatabase(DatabaseUtils.initializationFile);
+    databaseStockService = new DatabaseStockService();
 }
 
     /**
@@ -57,7 +59,6 @@ public void setUp() {
      */
     @Test(expected = StockServiceException.class)
     public void testGetQuoteNotThere() throws Exception {
-        DatabaseStockService databaseStockService = new DatabaseStockService();
         String symbol = "KROY";
         StockQuote stockQuote = databaseStockService.getQuote(symbol);
     }
@@ -71,7 +72,7 @@ public void setUp() {
      */
     @Test
     public void testGetQuoteDates() throws Exception {
-        DatabaseStockService databaseStockService = new DatabaseStockService();
+        String symbol = "APPL";
         String fromStringDate = "2018-01-01 00:00:01";
         String untilStringDate = "2018-06-30 00:00:01";
         Calendar fromCalendar = convertStringToCalendarDate(fromStringDate);
@@ -86,11 +87,11 @@ public void setUp() {
      */
     @Test
     public void testGetQuoteInterval() throws Exception {
+        String symbol = "APPL";
         String fromStringDate = "2018-01-01 00:00:01";
         String untilStringDate = "2018-06-30 00:00:01";
         Calendar fromCalendar = convertStringToCalendarDate(fromStringDate);
         Calendar untilCalendar = convertStringToCalendarDate(untilStringDate);
-        DatabaseStockService databaseStockService = new DatabaseStockService();
         List<StockQuote> stockQuoteList = databaseStockService.getQuote(symbol,fromCalendar,untilCalendar, Interval.HALF_HOUR);
         assertFalse("Verify we can get a stock quote from the db", stockQuoteList.isEmpty());
     }

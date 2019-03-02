@@ -49,47 +49,21 @@ public class DatabasePersonService implements PersonService {
                 transaction.commit();
             }
         }
-
         return returnValue;
-
     }
 
     /**
-     * Add a new person or update an existing Person's data
-     *
-     * @param person a person object to either update or create
-     */
-    @Override
-    public void addOrUpdatePerson(Person person) {
-        Session session = DatabaseUtils.getSessionFactory().openSession();
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            session.saveOrUpdate(person);
-            transaction.commit();
-        } catch (HibernateException e) {
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback();  // close transaction
-            }
-        } finally {
-            if (transaction != null && transaction.isActive()) {
-                transaction.commit();
-            }
-        }
-    }
-
-    /**
-     * Get a list of all a person's stocks.
+     * Get a list of all a person's stock interests
      *
      * @param person the person
      * @return a list of stock instances
      */
     @Override
     @SuppressWarnings("unchecked")
-    public List<StockInterests> getStocks(Person person) {
+    public List<StockInterests> getStockInterests(Person person) throws PersonServiceException{
         Session session =  DatabaseUtils.getSessionFactory().openSession();
         Transaction transaction = null;
-        List<StockInterests> hobbies = new ArrayList<>();
+        List<StockInterests> returnValue = null;
         try {
             transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(StockInterests.class);
@@ -100,48 +74,20 @@ public class DatabasePersonService implements PersonService {
              * to suppress them - in almost all other cases they should be fixed not suppressed
              */
             List<StockInterests> list = criteria.list();
-            for (StockInterests personStockInterests : list) {
-                hobbies.add(personStockInterests.getStockInterests());
-            }
-            transaction.commit();
+            returnValue = criteria.list();
+
         } catch (HibernateException e) {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();  // close transaction
             }
+            throw new PersonServiceException("Could not get Stock Interest data. " + e.getMessage(), e);
         } finally {
             if (transaction != null && transaction.isActive()) {
                 transaction.commit();
             }
         }
-        return hobbies;
 
-    }
+        return returnValue;
 
-    /**
-     * Assign a stockInterests to a person.
-     *
-     * @param stockInterests  The stockInterests to assign
-     * @param person The person to assign the stockInterests too.
-     */
-    @Override
-    public void addHobbyToPerson(StockInterests stockInterests, Person person) {
-        Session session =  DatabaseUtils.getSessionFactory().openSession();
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            PersonStockInterests personStockInterests = new PersonStockInterests();
-            personStockInterests.setStockInterests(stockInterests);
-            personStockInterests.setPerson(person);
-            session.saveOrUpdate(personStockInterests);
-            transaction.commit();
-        } catch (HibernateException e) {
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback();  // close transaction
-            }
-        } finally {
-            if (transaction != null && transaction.isActive()) {
-                transaction.commit();
-            }
-        }
     }
 }
