@@ -75,7 +75,7 @@
     <dependency>
       <groupId>org.hibernate.common</groupId>
       <artifactId>hibernate-commons-annotations</artifactId>
-      <version>4.0.2git s.Final</version>
+      <version>4.0.2.Final</version>
       <classifier>tests</classifier>
     </dependency>
     <dependency>
