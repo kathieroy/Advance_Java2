@@ -5,15 +5,12 @@ import org.junit.Test;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * Unit test for the Person class
  */
 public class PersonTest {
-
-    public  static final Calendar birthDayCalendar = Calendar.getInstance();
-
 
     public static final String firstName = "Roy";
     public  static final String lastName = "Kathie";
@@ -25,7 +22,6 @@ public class PersonTest {
      */
     public static Person createPerson() {
         Person person = new Person();
-
         person.setFirstName(firstName);
         person.setLastName(lastName);
         return person;
@@ -41,5 +37,26 @@ public class PersonTest {
         assertEquals("id matches", id, person.getId());
 
     }
+    /**
+     * check that the equals method in Person works
+     * by comparing two object that are the same
+     */
+    @Test
+    public void testEqual() {
+        Person person = new Person(10,"Nick","Roy");
+        assertTrue("checking equals",person.equals(person));
+        assertTrue(person.hashCode() == person.hashCode());
 
+    }
+    /**
+     * check that the equals method in Person works
+     * by comparing two object that are the same
+     */
+    @Test
+    public void testNotEqual() {
+        Person person = new Person(10,"Nick","Roy");
+        Person person2 = new Person(12,"Melissa","Morin");
+        assertFalse("checking not equal",person.equals(person2));
+        assertFalse(person.hashCode() == person2.hashCode());
+    }
 }

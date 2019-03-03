@@ -2,6 +2,7 @@ package edu.kathieRoy.advancedjava.stockquote.util;
 
 import edu.kathieRoy.advancedjava.util.DatabaseInitializationException;
 import edu.kathieRoy.advancedjava.util.DatabaseUtils;
+import org.hibernate.Session;
 import org.junit.Test;
 
 import java.sql.Connection;
@@ -70,5 +71,14 @@ public class DatabaseUtilsTest {
     @Test
     public void testSomeSql() throws Exception {
         DatabaseUtils.executeSQL("select * from quotes");
+    }
+
+    /**
+     * Test the getSessionFactory method
+     */
+    @Test
+    public void getSessionFactory() {
+        Session session = DatabaseUtils.getSessionFactory().openSession();
+        assertNotNull(session);
     }
 }
