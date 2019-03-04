@@ -12,8 +12,8 @@ import static org.junit.Assert.*;
  */
 public class PersonTest {
 
-    public static final String firstName = "Roy";
-    public  static final String lastName = "Kathie";
+    public static final String firstName = "Kathie";
+    public  static final String lastName = "Roy";
 
     /**
      * Testing helper method for generating Person test data

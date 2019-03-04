@@ -12,10 +12,10 @@ import static org.junit.Assert.*;
 
 public class StockInterestsTest  {
 
-    public static final int id = 100;
+    public static final int id = 1;
     public  static final String symbol = "APPL";
-    public static final String firstName = "Roy";
-    public  static final String lastName = "Kathie";
+    public static final String firstName = "Kathie";
+    public  static final String lastName = "Roy";
     public  static Person person = null;
     public static boolean compareResult;
 

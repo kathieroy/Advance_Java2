@@ -26,6 +26,15 @@ public class DatabaseUtilsTest {
         assertNotNull("verify that we can get a connection ok",connection);
     }
 
+    /**
+     * This test will take an initialization file and create a db, then add rows to it.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testGoodInitFile() throws Exception {
+        DatabaseUtils.initializeDatabase(DatabaseUtils.initializationFile);
+    }
 
     /**
      * This test will verify that the sql statement can be executed
@@ -40,17 +49,7 @@ public class DatabaseUtilsTest {
         assertTrue("verify that we can execute a statement",execute);
     }
 
-    /**
-     * This test will take an initialization file and create a db, then add rows to it.
-     * It was copied from the solution as I did not have any idea how to accomplish this task
-     * from within  the test program.
-     *
-     * @throws Exception
-     */
-    @Test
-    public void testGoodInitFile() throws Exception {
-        DatabaseUtils.initializeDatabase(DatabaseUtils.initializationFile);
-    }
+
 
     /**
      * this test will make sure that a DatabaseInitialization exception will
