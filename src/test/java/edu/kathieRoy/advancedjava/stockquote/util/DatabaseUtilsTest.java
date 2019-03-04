@@ -16,6 +16,16 @@ import static org.junit.Assert.assertTrue;
  */
 public class DatabaseUtilsTest {
     /**
+     * This test will take an initialization file and create a db, then add rows to it.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testGoodInitFile() throws Exception {
+        DatabaseUtils.initializeDatabase(DatabaseUtils.initializationFile);
+    }
+
+    /**
      * This test will verify that the connection to the
      * database can be made using the getConnection method.
      * @throws Exception
@@ -26,15 +36,6 @@ public class DatabaseUtilsTest {
         assertNotNull("verify that we can get a connection ok",connection);
     }
 
-    /**
-     * This test will take an initialization file and create a db, then add rows to it.
-     *
-     * @throws Exception
-     */
-    @Test
-    public void testGoodInitFile() throws Exception {
-        DatabaseUtils.initializeDatabase(DatabaseUtils.initializationFile);
-    }
 
     /**
      * This test will verify that the sql statement can be executed
