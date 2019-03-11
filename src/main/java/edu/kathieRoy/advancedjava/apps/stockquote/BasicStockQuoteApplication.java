@@ -3,9 +3,15 @@ package edu.kathieRoy.advancedjava.apps.stockquote;
 
 import edu.kathieRoy.advancedjava.model.*;
 import edu.kathieRoy.advancedjava.service.*;
+import edu.kathieRoy.advancedjava.util.InvalidXMLException;
+import edu.kathieRoy.advancedjava.util.XMLUtils;
+import edu.kathieRoy.advancedjava.xml.Stocks;
 
 
+import java.math.BigDecimal;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,6 +22,45 @@ public class BasicStockQuoteApplication {
     private StockService stockService;
 
     private PersonService personService;
+    private static final String pattern = "yyyy-MM-dd hh:mm:ss";
+    private static String xmlInstance = "<stocks>\n" +
+            " <stock symbol=\"VNET\" price=\"110.10\" time=\"2015-04-10 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"AKAM\" price=\"30.00\" time=\"2015-02-11 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"AOL\" price=\"40.98\" time=\"2015-07-12 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"BCOM\" price=\"55.50\" time=\"2015-09-13 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"BIDU\" price=\"10.45\" time=\"2015-06-11 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"BCOR\" price=\"76.23\" time=\"2015-05-12 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"WIFI\" price=\"50.65\" time=\"2015-09-13 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"BRNW\" price=\"100.10\" time=\"2015-04-14 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"CARB\" price=\"49.20\" time=\"2015-05-15 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"JRJC\" price=\"39.15\" time=\"2015-06-11 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"ANET\" price=\"54.13\" time=\"2015-03-12 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"VSET\" price=\"20.41\" time=\"2015-06-13 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"VNCT\" price=\"110.10\" time=\"2015-08-14 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"VNED\" price=\"160.10\" time=\"2015-02-15 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"ENET\" price=\"116.10\" time=\"2015-03-11 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"VFET\" price=\"13.10\" time=\"2015-04-12 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"VNGT\" price=\"10.10\" time=\"2015-05-13 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"VNEH\" price=\"20.10\" time=\"2015-06-14 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"INAT\" price=\"14.10\" time=\"2015-07-15 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"VJEB\" price=\"19.10\" time=\"2015-08-11 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"ANKT\" price=\"310.10\" time=\"2015-09-11 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"VBEL\" price=\"13.10\" time=\"2015-10-12 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"MNCT\" price=\"16.10\" time=\"2015-11-13 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"VNED\" price=\"18.10\" time=\"2015-12-14 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"ENOT\" price=\"290.80\" time=\"2015-02-15 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"VFEP\" price=\"70.55\" time=\"2015-03-16 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"QNGT\" price=\"80.70\" time=\"2015-04-11 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"VREH\" price=\"310.96\" time=\"2015-05-12 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"INST\" price=\"410.15\" time=\"2015-06-13 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"SJET\" price=\"60.40\" time=\"2015-07-11 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"UNKT\" price=\"450.17\" time=\"2015-08-10 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"VVEL\" price=\"22.20\" time=\"2015-02-11 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"MNWT\" price=\"190.90\" time=\"2015-02-11 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"VNEX\" price=\"60.70\" time=\"2015-03-12 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"YNOT\" price=\"88.80\" time=\"2015-03-13 00:00:01\"> </stock>\n" +
+            " <stock symbol=\"VZEP\" price=\"11.33\" time=\"2015-04-14 00:00:01\"> </stock>\n" +
+           " </stocks>";
 
     // an example of how to use enum - not part of assignment 3 but useful for assignment 4
 
@@ -177,9 +222,36 @@ public class BasicStockQuoteApplication {
             programTerminationMessage = "StockService failed: " + e.getMessage();
         }
 
+        Stocks stocks = null;
+        // here is how to go from XML to Java
+        try {
+            XMLUtils.unmarshall(xmlInstance, Stocks.class);
+            System.out.println(stocks.toString());
+        } catch (InvalidXMLException e) {
+            e.printStackTrace();
+        }
+        Date stockDate = new Date();
+        List<Stocks.Stock> stockList = stocks.getStock();
+        for (Stocks.Stock stock : stockList) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+                stockDate = sdf.parse(stock.getTime());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            StockQuote stockQuote = new StockQuote(new BigDecimal(stock.getPrice()), stockDate, stock.getSymbol());
+             //how to persist?
+        }
+        /*
+        try{
+            // here is how to go from Java to XML
+                XMLUtils.marshall(stocks);
+        } catch (InvalidXMLException e) {
+            e.printStackTrace();
+        }
+*/
         exit(exitStatus, programTerminationMessage);
      //   System.out.println("Oops could not parse a date");
-
 
     }
 

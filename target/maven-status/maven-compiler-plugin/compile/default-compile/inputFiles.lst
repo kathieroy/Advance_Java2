@@ -1,10 +1,12 @@
 C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\service\StockService.java
 C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\model\Person.java
 C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\util\ProgramConfiguration.java
+C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\util\XMLUtils.java
 C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\service\PersonService.java
 C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\service\ServiceFactory.java
 C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\model\StockInterests.java
 C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\service\PersonServiceException.java
+C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\service\ObjectFactory.java
 C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\model\StockQuery.java
 C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\model\Interval.java
 C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\service\StockServiceException.java
@@ -12,8 +14,11 @@ C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\util\Data
 C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\apps\stockquote\BasicStockQuoteApplication.java
 C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\util\DatabaseException.java
 C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\model\StockData.java
+C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\xml\Stocks.java
 C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\service\DatabaseStockService.java
 C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\util\DatabaseConnectionException.java
+C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\util\InvalidXMLException.java
 C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\service\DatabasePersonService.java
 C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\util\DatabaseInitializationException.java
 C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\model\StockQuote.java
+C:\Users\kathie\Advance_Java2\src\main\java\edu\kathieRoy\advancedjava\xml\XMLDomainObject.java
