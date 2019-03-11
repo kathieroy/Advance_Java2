@@ -221,14 +221,19 @@ public class BasicStockQuoteApplication {
             exitStatus = ProgramTerminationStatusEnum.ABNORMAL;
             programTerminationMessage = "StockService failed: " + e.getMessage();
         }
-
+/**
+ * here, we will take the xml instance provided and
+ * unmarshall it, then - convert it to database ORM objects (stockQuote) and persist to
+ * the database.
+ */
         Stocks stocks = null;
         // here is how to go from XML to Java
         try {
             XMLUtils.unmarshall(xmlInstance, Stocks.class);
             System.out.println(stocks.toString());
         } catch (InvalidXMLException e) {
-            e.printStackTrace();
+            exitStatus = ProgramTerminationStatusEnum.ABNORMAL;
+            programTerminationMessage = "XML could not be unmarshalled" + e.getMessage();
         }
         Date stockDate = new Date();
         List<Stocks.Stock> stockList = stocks.getStock();
@@ -237,22 +242,14 @@ public class BasicStockQuoteApplication {
                 SimpleDateFormat sdf = new SimpleDateFormat(pattern);
                 stockDate = sdf.parse(stock.getTime());
             } catch (ParseException e) {
-                e.printStackTrace();
+                exitStatus = ProgramTerminationStatusEnum.ABNORMAL;
+                programTerminationMessage = "XML data info is invalid" + e.getMessage();
             }
             StockQuote stockQuote = new StockQuote(new BigDecimal(stock.getPrice()), stockDate, stock.getSymbol());
              //how to persist?
         }
-        /*
-        try{
-            // here is how to go from Java to XML
-                XMLUtils.marshall(stocks);
-        } catch (InvalidXMLException e) {
-            e.printStackTrace();
-        }
-*/
-        exit(exitStatus, programTerminationMessage);
-     //   System.out.println("Oops could not parse a date");
 
+        exit(exitStatus, programTerminationMessage);
     }
 
     /**

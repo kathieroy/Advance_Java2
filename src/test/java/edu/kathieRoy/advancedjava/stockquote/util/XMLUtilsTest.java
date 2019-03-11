@@ -27,7 +27,10 @@ public class XMLUtilsTest {
             "    <stock symbol=\"BCOM\" price=\"55.50\" time=\"2015-09-13 00:00:01\"> </stock>\n" +
             "</stocks>";
 
-
+    /**
+     * test the unmarshalling of the data from xml without the schema
+     * @throws Exception
+     */
     @Test
     public void testUnmarshall() throws Exception {
         Stocks stocks = XMLUtils.unmarshall(xmlStocks, Stocks.class);
@@ -39,6 +42,10 @@ public class XMLUtilsTest {
         }
     }
 
+    /**
+     * Test the unmarshalling with the schema provided.
+     * @throws Exception
+     */
     @Test
     public void testUnmarshallWithSchemaValidation()throws Exception {
         Stocks stocks = XMLUtils.unmarshall(xmlStocks, Stocks.class, "/xml/stock_info.xsd");
@@ -50,6 +57,10 @@ public class XMLUtilsTest {
         }
      }
 
+    /**
+     * Test the "unmarshalling" of the stock data
+     * @throws Exception
+     */
     @Test
     public void testMarshall() throws Exception {
         Stocks stocks = XMLUtils.unmarshall(xmlStocks, Stocks.class, "/xml/stock_info.xsd");
@@ -58,6 +69,10 @@ public class XMLUtilsTest {
         assertEquals("XML out is correct", xml.trim() ,xmlStocks.trim());
     }
 
+    /**
+     * insure that you have the Symbol AOL as listed in data above
+     * @param stock
+     */
     private void validateStocks(Stocks.Stock stock ) {
         assertTrue("Symbol is correct", stock.getSymbol().equals(SYMBOL));
     }
