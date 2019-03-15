@@ -1,53 +1,72 @@
 package edu.kathieRoy.advancedjava.model;
 
-import jdk.nashorn.internal.ir.annotations.Immutable;
-
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
- * this is a container class the holds the information about a stock for a given date
+ * A container class that contains stock data.
  */
-@Immutable
-public class StockQuote {
+public class StockQuote extends StockData {
 
-    private final BigDecimal price;
-    private final Calendar date;
-    private final String symbol;
+    private BigDecimal price;
+    private Date date;
+    private String symbol;
 
-    /*
-     * ** @param symbol we are taking a symbol in, ie: IBM - but not yet using it.
+    /**
+     * Create a new instance of a StockQuote.
+     *
+     * @param price  the share price for the given date
+     * @param date   the date of the share price
+     * @param symbol the stock symbol.
      */
-    public StockQuote(BigDecimal price, Calendar date, String symbol) {
-
+    public StockQuote(BigDecimal price, Date date, String symbol) {
+        super();
         this.price = price;
-        this.date = (Calendar) date.clone();
+        this.date = date;
         this.symbol = symbol;
     }
 
     /**
-     * get method to return the price of a stock
-     *
-     * @return the price of the StockQuote object
+     * @param nextPrice
+     * @param nextStockDate
+     * @param symbol
+     */
+    public StockQuote(BigDecimal nextPrice, Calendar nextStockDate, String symbol) {
+        super();
+        this.price = price;
+        this.date = nextStockDate.getTime();
+        this.symbol = symbol;
+    }
+
+    /**
+     * @return Get the share price for the given date.
      */
     public BigDecimal getPrice() {
         return price;
     }
 
     /**
-     * get method to return the date of the stock price
-     * @return the date of the StockQuote object
+     * @return The date of the share price
      */
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
 
     /**
-     * get method to return the symbol of the stock
-     * @return the symbol of the stock quote object
+     * @return The stock symbol.
      */
     public String getSymbol() {
         return symbol;
     }
 
+    @Override
+    public String toString() {
+        String dateString = simpleDateFormat.format(date);
+        return "StockQuote{" +
+                "price=" + price +
+                ", date=" + dateString +
+                ", symbol='" + symbol + '\'' +
+                '}';
+    }
 }
