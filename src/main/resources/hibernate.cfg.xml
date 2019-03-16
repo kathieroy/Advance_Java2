@@ -19,5 +19,6 @@
 
         <mapping class="edu.kathieRoy.advancedjava.model.StockInterests"/>
         <mapping class="edu.kathieRoy.advancedjava.model.Person"/>
+        <mapping class="edu.kathieRoy.advancedjava.model.Quote"/>
     </session-factory>
 </hibernate-configuration>

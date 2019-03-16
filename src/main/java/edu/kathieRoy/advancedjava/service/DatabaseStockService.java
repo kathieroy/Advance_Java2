@@ -5,6 +5,10 @@ import edu.kathieRoy.advancedjava.model.StockData;
 import edu.kathieRoy.advancedjava.model.StockQuote;
 import edu.kathieRoy.advancedjava.util.DatabaseConnectionException;
 import edu.kathieRoy.advancedjava.util.DatabaseUtils;
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -132,7 +136,7 @@ public class DatabaseStockService implements StockService {
             Statement statement = connection.createStatement();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(StockData.dateFormat);
 
-            String fromDateString = simpleDateFormat.format(from.getTime());
+            String fromDateString = simpleDateFormat.format(from.getTime());  //from is Calendar - converting to string
             String toDateString = simpleDateFormat.format(until.getTime());
 
             nextStockStartDate = (Calendar) from.clone();

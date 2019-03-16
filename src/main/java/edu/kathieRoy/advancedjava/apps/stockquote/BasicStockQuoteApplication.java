@@ -3,9 +3,13 @@ package edu.kathieRoy.advancedjava.apps.stockquote;
 
 import edu.kathieRoy.advancedjava.model.*;
 import edu.kathieRoy.advancedjava.service.*;
+import edu.kathieRoy.advancedjava.util.DatabaseUtils;
 import edu.kathieRoy.advancedjava.util.InvalidXMLException;
 import edu.kathieRoy.advancedjava.util.XMLUtils;
 import edu.kathieRoy.advancedjava.xml.Stocks;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 
 import java.math.BigDecimal;
@@ -182,7 +186,7 @@ public class BasicStockQuoteApplication {
      *
      * @param args one or more stock symbols
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws StockServiceException {
 
         // be optimistic init to positive values
         ProgramTerminationStatusEnum exitStatus = ProgramTerminationStatusEnum.NORMAL;
@@ -197,6 +201,7 @@ public class BasicStockQuoteApplication {
             StockQuery stockQuery = new StockQuery(args[0], args[1], args[2], interval);
 
             StockService stockService = ServiceFactory.getStockServiceInstance();
+
             BasicStockQuoteApplication basicStockQuoteApplication =
                     new BasicStockQuoteApplication(stockService);
             basicStockQuoteApplication.displayStockQuotes(stockQuery);
@@ -221,37 +226,80 @@ public class BasicStockQuoteApplication {
             exitStatus = ProgramTerminationStatusEnum.ABNORMAL;
             programTerminationMessage = "StockService failed: " + e.getMessage();
         }
+
+
 /**
  * here, we will take the xml instance provided and
  * unmarshall it, then - convert it to database ORM objects (stockQuote) and persist to
  * the database.
  */
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(StockData.dateFormat);
+        String stringDate = "";
+        java.sql.Timestamp sqlStockDate = null;
         Stocks stocks = null;
         // here is how to go from XML to Java
         try {
-            XMLUtils.unmarshall(xmlInstance, Stocks.class);
+            stocks = XMLUtils.unmarshall(xmlInstance, Stocks.class);
             System.out.println(stocks.toString());
         } catch (InvalidXMLException e) {
             exitStatus = ProgramTerminationStatusEnum.ABNORMAL;
             programTerminationMessage = "XML could not be unmarshalled" + e.getMessage();
         }
+       //I have no idea how to use ObjectService or whether it should be used.
+        StockService stockService = ServiceFactory.getStockServiceInstance();
+
+        BasicStockQuoteApplication basicStockQuoteApplication =
+                new BasicStockQuoteApplication(stockService);
+        Session session = DatabaseUtils.getSessionFactory().openSession();
+
         Date stockDate = new Date();
         List<Stocks.Stock> stockList = stocks.getStock();
         for (Stocks.Stock stock : stockList) {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat(pattern);
                 stockDate = sdf.parse(stock.getTime());
+                stringDate = simpleDateFormat.format(stockDate.getTime());
+                sqlStockDate = java.sql.Timestamp.valueOf(stringDate);
             } catch (ParseException e) {
                 exitStatus = ProgramTerminationStatusEnum.ABNORMAL;
                 programTerminationMessage = "XML data info is invalid" + e.getMessage();
             }
-            StockQuote stockQuote = new StockQuote(new BigDecimal(stock.getPrice()), stockDate, stock.getSymbol());
-             //how to persist?
+            Quote quote = new Quote(stock.getSymbol(),new BigDecimal(stock.getPrice()),sqlStockDate);
+             //persist
+            try {
+                basicStockQuoteApplication.updateStockQuote(session,quote);
+            } catch (StockServiceException e) {
+                exitStatus = ProgramTerminationStatusEnum.ABNORMAL;
+                programTerminationMessage = "StockService failed: " + e.getMessage();
+                break;
+            }
         }
-
         exit(exitStatus, programTerminationMessage);
     }
 
+
+    public void updateStockQuote(Session session, Quote quote) throws StockServiceException {
+
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.persist(quote);
+            transaction.commit();
+
+
+        } catch (HibernateException e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();  // close transaction
+            }
+            throw new StockServiceException("Could not update Stock data. " + e.getMessage(), e);
+        } finally {
+            if (transaction != null && transaction.isActive()) {
+                transaction.commit();
+                session.close();
+            }
+        }
+    }
     /**
      * this method will take in the String arg (meant to be used with the run argument#4)
      * and determine which Enum corresponds to it.  If it does not find one, the default is DAY.

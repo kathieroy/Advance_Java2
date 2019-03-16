@@ -63,12 +63,12 @@ public class BasicStockQuoteApplicationTest {
         assertTrue("make sure until date in output", output.contains(until));
 
     }
-
+/*
     @Test(expected = NullPointerException.class)
     public void testMainNegative() {
         BasicStockQuoteApplication.main(null);
     }
-
+*/
     @Test
     public void testFindInterval() {
         Interval testInterval = BasicStockQuoteApplication.findInterval("Day");

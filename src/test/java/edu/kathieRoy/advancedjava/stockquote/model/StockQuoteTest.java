@@ -53,4 +53,34 @@ public class StockQuoteTest {
     public void testGetSymbol() {
         assertEquals("Symbol  is correct", symbol, stockQuote.getSymbol());
     }
+
+    @Test
+    public void getId() {
+    }
+
+    @Test
+    public void setId() {
+    }
+
+    @Test
+    public void getSymbol() {
+    }
+
+    @Test
+    public void setSymbol() {
+    }
+
+    @Test
+    public void getTime() {
+    }
+
+    @Test
+    public void setLastName() {
+    }
+
+    @Test
+    public void equals() {
+    }
+
+
 }

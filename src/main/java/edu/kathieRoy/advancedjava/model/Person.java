@@ -1,7 +1,6 @@
 package edu.kathieRoy.advancedjava.model;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 /**
  * Models the Person table

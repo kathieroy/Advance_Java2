@@ -50,4 +50,6 @@ public interface StockService {
      * error.
      */
     List<StockQuote> getQuote(String symbol, Calendar from, Calendar until, Interval interval) throws StockServiceException;
+
+
 }
