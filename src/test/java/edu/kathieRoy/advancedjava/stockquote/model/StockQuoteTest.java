@@ -41,45 +41,20 @@ public class StockQuoteTest {
 
     @Test
     public void testGetPrice() {
+        stockQuote = new StockQuote(price, date, symbol);
         assertEquals("Share price is correct", price, stockQuote.getPrice());
     }
 
     @Test
     public void testGetDate() {
+        stockQuote = new StockQuote(price, date, symbol);
         assertEquals("Share date is correct", date, stockQuote.getDate());
     }
 
     @Test
     public void testGetSymbol() {
+        stockQuote = new StockQuote(price, date, symbol);
         assertEquals("Symbol  is correct", symbol, stockQuote.getSymbol());
-    }
-
-    @Test
-    public void getId() {
-    }
-
-    @Test
-    public void setId() {
-    }
-
-    @Test
-    public void getSymbol() {
-    }
-
-    @Test
-    public void setSymbol() {
-    }
-
-    @Test
-    public void getTime() {
-    }
-
-    @Test
-    public void setLastName() {
-    }
-
-    @Test
-    public void equals() {
     }
 
 
