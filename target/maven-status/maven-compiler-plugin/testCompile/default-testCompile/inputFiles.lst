@@ -1,2 +1,10 @@
-C:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\StockQuoteTest.java
-C:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\AppTest.java
+C:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\stockquote\services\DatabaseStockServiceTest.java
+C:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\stockquote\model\StockQueryTest.java
+C:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\stockquote\stockquote\BasicStockQuoteApplicationTest.java
+C:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\stockquote\services\ServiceFactoryTest.java
+C:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\stockquote\util\DatabaseUtilsTest.java
+C:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\stockquote\model\StockInterestsTest.java
+C:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\stockquote\model\PersonTest.java
+C:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\stockquote\services\DatabasePersonServiceTest.java
+C:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\stockquote\model\StockQuoteTest.java
+C:\Users\kathie\Advance_Java2\src\test\java\edu\kathieRoy\advancedjava\stockquote\util\XMLUtilsTest.java
